@@ -1,884 +1,544 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=<!DOCTYPE html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PayEase - Modern Payroll Management System</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>PayrollSync | Modern Employee Payroll Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #1e40af;
-            --light: #f8fafc;
+            --primary: #6366f1;
+            --secondary: #4f46e5;
+            --accent: #38bdf8;
             --dark: #0f172a;
-            --gray: #94a3b8;
-            --success: #10b981;
+            --light: #f1f5f9;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        
         body {
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: white;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background-color: white;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-outline {
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            background-color: transparent;
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            border: 1px solid var(--primary);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 180px 0 100px;
-            background: linear-gradient(to right, #e0e7ff, #ffffff);
-        }
-
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .hero-image {
-            flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        /* Register Section */
-        .register {
-            padding: 150px 0 100px;
-            background: white;
-        }
-
-        .register-content {
-            display: flex;
-            gap: 50px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .register-form {
-            flex: 1;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        .form-header {
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .form-header h1 {
-            font-size: 2.2rem;
-        }
-
-        .form-header p {
-            color: var(--gray);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .password-strength {
-            font-size: 0.8rem;
-            margin-top: 5px;
-            color: var(--gray);
-        }
-
-        .strength-meter {
-            color: #e53e3e;
-        }
-
-        .btn-block {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            text-align: center;
-        }
-
-        .btn-google {
-            background: white;
-            color: #444;
-            border: 1px solid #ddd;
-        }
-
-        .btn-google:hover {
-            background: #f8f9fa;
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #eee;
-        }
-
-        .divider::before {
-            margin-right: 10px;
-        }
-
-        .divider::after {
-            margin-left: 10px;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            color: var(--gray);
-        }
-
-        .login-link a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .register-benefits {
-            flex: 1;
-            padding: 0 20px;
-        }
-
-        .register-benefits h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .benefits-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .benefits-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .benefits-list i {
-            color: var(--success);
-        }
-
-        .register-image {
-            margin-top: 30px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .register-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--gray);
-            margin-bottom: 30px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background-color: white;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .feature-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            color: var(--gray);
-        }
-
-        /* Dashboard Preview */
-        .dashboard {
-            padding: 100px 0;
-            background-color: #f8fafc;
-        }
-
-        .dashboard-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .dashboard-image {
-            width: 100%;
-            max-width: 900px;
-            margin-top: 40px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .dashboard-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 0;
-            background-color: white;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: var(--dark);
-            margin-bottom: 20px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .author-image {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
-        }
-
-        .author-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .author-info h4 {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .author-info p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* CTA */
-        .cta {
-            padding: 100px 0;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .cta p {
-            max-width: 700px;
-            margin: 0 auto 30px;
-            opacity: 0.9;
-        }
-
-        .btn-white {
-            background-color: white;
-            color: var(--primary);
-            border: 1px solid white;
-        }
-
-        .btn-white:hover {
-            background-color: transparent;
-            color: white;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 60px 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: var(--gray);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: white;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content {
-                flex-direction: column;
-            }
-
-            .hero-text, .hero-image {
-                width: 100%;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .nav-links {
-                display: none;
-            }
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+        
+        .login-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        input:focus {
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <i class="fas fa-money-check-alt logo-icon"></i>
-                    <span>PayEase</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#features">Features</a>
-                    <a href="#dashboard">Dashboard</a>
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="nav-buttons">
-                    <a href="#" class="btn btn-outline">Login</a>
-                    <a href="#" class="btn btn-primary">Get Started</a>
-                </div>
-            </nav>
-        </div>
-    </header>
-
-    <section class="register">
-        <div class="container">
-            <div class="register-content">
-                <div class="register-form">
-                    <div class="form-header">
-                        <h1>Create Your PayEase Account</h1>
-                        <p>Get started with your 14-day free trial. No credit card required.</p>
-                    </div>
+    <!-- Login Section -->
+    <div class="min-h-screen flex items-center justify-center bg-gradient-to-tr from-gray-900 via-gray-800 to-gray-900 p-4">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/811e11d9-7833-411f-a46d-d8072e5a6df1.png" alt="PayrollSync logo" class="h-16 w-16 mx-auto">
+                <h1 class="text-3xl font-bold text-blue-400 mt-4">PayrollSync</h1>
+                <p class="text-gray-400 mt-2">Create your payroll management account</p>
+            </div>
+            
+            <div class="bg-gray-800 rounded-xl shadow-xl overflow-hidden border border-gray-700">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-center text-gray-100 mb-8">Create Account</h2>
                     <form>
-                        <div class="form-group">
-                            <label for="company">Company Name</label>
-                            <input type="text" id="company" placeholder="Enter company name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Business Email</label>
-                            <input type="email" id="email" placeholder="Enter business email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" placeholder="Create password" required>
-                            <div class="password-strength">
-                                Password strength: <span class="strength-meter">Weak</span>
+                        <div class="mb-6">
+                            <label for="company-name" class="block text-sm font-medium text-gray-400 mb-2">Company Name</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-building text-gray-500"></i>
+                                </div>
+                                <input type="text" id="company-name" class="bg-gray-700 text-white w-full pl-10 pr-3 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Company">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="employees">Number of Employees</label>
-                            <select id="employees" required>
-                                <option value="">Select</option>
-                                <option value="1-10">1-10</option>
-                                <option value="11-50">11-50</option>
-                                <option value="51-200">51-200</option>
-                                <option value="201+">201+</option>
-                            </select>
+                        <div class="mb-6">
+                            <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-gray-500"></i>
+                                </div>
+                                <input type="email" id="email" class="bg-gray-700 text-white w-full pl-10 pr-3 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="admin@company.com">
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
-                        <div class="divider">or</div>
-                        <button type="button" class="btn btn-google btn-block">
-                            <i class="fab fa-google"></i> Sign up with Google
+                        <div class="mb-6">
+                            <label for="password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-500"></i>
+                                </div>
+                                <input type="password" id="password" class="bg-gray-700 text-white w-full pl-10 pr-3 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="confirm-password" class="block text-sm font-medium text-gray-400 mb-2">Confirm Password</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-lock text-gray-500"></i>
+                                </div>
+                                <input type="password" id="confirm-password" class="bg-gray-700 text-white w-full pl-10 pr-3 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="••••••••">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition duration-200">
+                            Create Account
                         </button>
-                        <p class="login-link">Already have an account? <a href="#">Log in</a></p>
                     </form>
                 </div>
-                <div class="register-benefits">
-                    <h3>Why join PayEase?</h3>
-                    <ul class="benefits-list">
-                        <li><i class="fas fa-check-circle"></i> 14-day free trial, no credit card needed</li>
-                        <li><i class="fas fa-check-circle"></i> Automate your payroll in minutes</li>
-                        <li><i class="fas fa-check-circle"></i> Stay compliant with tax regulations</li>
-                        <li><i class="fas fa-check-circle"></i> Dedicated support during setup</li>
+                <div class="px-8 py-4 bg-gray-800 border-t border-gray-700">
+                    <p class="text-gray-400 text-sm text-center">
+                        Already have an account? <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">Sign in</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <p class="text-xs text-gray-500">
+                    © 2023 PayrollSync. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white">
+        <div class="container mx-auto px-6 py-20 md:py-32">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-4">Effortless Employee Payroll Management</h1>
+                    <p class="text-xl md:text-2xl mb-8 opacity-90">Automate, simplify, and streamline your payroll process with our comprehensive solution designed for modern businesses.</p>
+                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                        <a href="#" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold text-lg text-center shadow-lg transition">Start Free Trial</a>
+                        <a href="#features" class="border-2 border-white hover:bg-blue-700 px-8 py-3 rounded-lg font-semibold text-lg text-center transition">Explore Features</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3faf4028-7519-41f9-999d-a2d874deadcc.png" alt="Dashboard interface of PayrollSync showing payroll analytics, employee profiles and payment processing screens" class="rounded-lg shadow-2xl"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos Section -->
+    <section class="bg-gray-100 py-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-center text-gray-600 mb-12 text-lg">Trusted by leading companies worldwide</h2>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4549c8a2-4751-43bb-b84a-090007712485.png" alt="TechCorp company logo in blue with abstract geometric design" class="h-12 opacity-70 hover:opacity-100 transition"/>
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/38cb0717-0371-43f7-8e0b-08b0508543df.png" alt="GlobalSolutions company logo with globe icon and modern sans-serif typography" class="h-12 opacity-70 hover:opacity-100 transition"/>
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/227ecbb8-b28e-48c3-ba26-bf3cac4de1f1.png" alt="Innovatek company logo in green with leaf icon representing sustainability" class="h-12 opacity-70 hover:opacity-100 transition"/>
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/197ac2cb-4f3a-44e1-abbd-19556c96ca99.png" alt="PrimeSoft company logo featuring bold uppercase typography with gradient effect" class="h-12 opacity-70 hover:opacity-100 transition"/>
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0f2fbfe0-2af8-4c4a-ad47-2623e803ccb5.png" alt="BrightBridge consultancy logo with bridge icon and modern minimalist design" class="h-12 opacity-70 hover:opacity-100 transition"/>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Powerful Payroll Features</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Everything you need to manage payroll effortlessly while staying compliant with regulations.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-gray-800 rounded-xl p-8 transition duration-300 border border-gray-700">
+                    <div class="w-14 h-14 bg-blue-900 bg-opacity-50 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-calculator text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-blue-100 mb-3">Automated Calculations</h3>
+                    <p class="text-gray-300">Accurate payroll calculations for salaries, deductions, bonuses, and taxes automatically adjusted for compliance.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-gray-50 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Time Tracking</h3>
+                    <p class="text-gray-600">Integrated timekeeping with overtime calculations and paid time off management.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-gray-50 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-file-invoice-dollar text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Tax Compliance</h3>
+                    <p class="text-gray-600">Stay compliant with automatic tax calculations, filings, and year-end reporting.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-gray-50 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Employee Self-Service</h3>
+                    <p class="text-gray-600">Employees can access payslips, request time off, and update details through our mobile app.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card bg-gray-50 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 bg-red-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Real-time Analytics</h3>
+                    <p class="text-gray-600">Comprehensive reporting and analytics dashboards for payroll metrics and labor costs.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card bg-gray-50 rounded-xl p-8 transition duration-300">
+                    <div class="w-14 h-14 bg-indigo-100 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-alt text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Bank-grade Security</h3>
+                    <p class="text-gray-600">Encrypted data storage, multi-factor authentication, and role-based access control.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How PayrollSync Works</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Simple steps to transform your payroll process</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row mb-16">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/83b866b9-a5f5-4429-b174-8580521876c2.png" alt="Step one of PayrollSync workflow showing employee data import options from various sources" class="rounded-lg shadow-lg"/>
+                </div>
+                <div class="md:w-1/2 md:pl-8 flex items-center">
+                    <div>
+                        <div class="bg-blue-100 text-blue-800 inline-block px-3 py-1 rounded-full mb-4 text-sm font-semibold">Step 1</div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Set Up Your Company Profile</h3>
+                        <p class="text-gray-600 mb-4">Create your company account, add employee details, departments, and configure payroll settings that match your business requirements.</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Import from existing HR systems</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Configure payroll cycles and pay types</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Set up tax profiles and benefits</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row-reverse mb-16">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7898a73c-ead7-4055-bfb9-e53699f125d7.png" alt="Step two of PayrollSync workflow showing timesheet approval and processing interface" class="rounded-lg shadow-lg"/>
+                </div>
+                <div class="md:w-1/2 md:pr-8 flex items-center">
+                    <div>
+                        <div class="bg-green-100 text-green-800 inline-block px-3 py-1 rounded-full mb-4 text-sm font-semibold">Step 2</div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Process Payroll Each Period</h3>
+                        <p class="text-gray-600 mb-4">Run payroll with confidence using our guided wizard that identifies potential issues before processing payments.</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Automatic time tracking imports</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Review and approve payroll preview</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>One-click payment processing</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d704fec-e433-4cd5-bbbb-9e1715210ce8.png" alt="Step three of PayrollSync workflow showing comprehensive payroll reports and analytics dashboard" class="rounded-lg shadow-lg"/>
+                </div>
+                <div class="md:w-1/2 md:pl-8 flex items-center">
+                    <div>
+                        <div class="bg-purple-100 text-purple-800 inline-block px-3 py-1 rounded-full mb-4 text-sm font-semibold">Step 3</div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-4">Tax Filing & Reporting</h3>
+                        <p class="text-gray-600 mb-4">We handle all the compliance paperwork so you can focus on your business. Automatic tax calculations, filings, and year-end reporting included.</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Automatic tax calculations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Electronic filings for all jurisdictions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Custom reports for financial analysis</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-blue-900 text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto">Join thousands of satisfied businesses who streamlined their payroll with PayrollSync</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-blue-700 rounded-xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a2c31e32-b535-4c69-8e96-206dab0eaef9.png" alt="Sarah Johnson portrait, HR Director at TechSolutions Inc" class="h-12 w-12 rounded-full"/>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Sarah Johnson</h4>
+                            <p class="text-blue-200 text-sm">HR Director, TechSolutions Inc</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-100 mb-4">"PayrollSync cut our payroll processing time by 70%. The self-service portal reduced HR inquiries by 80%, and the compliance features ensure we never miss a filing deadline."</p>
+                    <div class="flex text-yellow-300">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-blue-700 rounded-xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d62651f2-d083-4fbd-a23f-b6ec43dd3329.png" alt="Michael Chen portrait, CFO at RetailPlus" class="h-12 w-12 rounded-full"/>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Michael Chen</h4>
+                            <p class="text-blue-200 text-sm">CFO, RetailPlus</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-100 mb-4">"Moving to PayrollSync saved us $42,000 in our first year through elimination of errors and automated tax filings. The analytics dashboard is invaluable for labor cost planning."</p>
+                    <div class="flex text-yellow-300">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-blue-700 rounded-xl p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8c040b2a-3927-4d73-8c99-4277c868de07.png" alt="Lisa Rodriguez portrait, Founder & CEO of CreativeAgency LLP" class="h-12 w-12 rounded-full"/>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold">Lisa Rodriguez</h4>
+                            <p class="text-blue-200 text-sm">Founder & CEO, CreativeAgency LLP</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-100 mb-4">"As a small business with no HR department, PayrollSync has been a lifesaver. It handles everything from time tracking to tax filings with minimal effort from our team."</p>
+                    <div class="flex text-yellow-300">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-10 md:p-16 text-center text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Transform Your Payroll?</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto mb-8">Join thousands of businesses who trust PayrollSync with their most important financial process.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition inline-block">Start Free 14-Day Trial</a>
+                    <a href="#" class="border-2 border-white hover:bg-blue-700 px-8 py-4 rounded-lg font-semibold text-lg transition inline-block">Schedule a Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Find answers to common questions about PayrollSync</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-6">
+                    <!-- FAQ 1 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="text-xl font-semibold text-gray-800">Is PayrollSync compliant with tax regulations?</h3>
+                            <i class="fas fa-plus text-blue-600"></i>
+                        </button>
+                        <div class="faq-content mt-4 hidden pt-4 border-t border-gray-100">
+                            <p class="text-gray-600">Yes, PayrollSync stays up-to-date with federal, state, and local tax regulations across all jurisdictions where we operate. Our system automatically calculates and withholds the correct amounts for income tax, Social Security, Medicare, and other required deductions. We also handle quarterly and annual tax filings electronically.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="text-xl font-semibold text-gray-800">How does PayrollSync handle employee self-service?</h3>
+                            <i class="fas fa-plus text-blue-600"></i>
+                        </button>
+                        <div class="faq-content mt-4 hidden pt-4 border-t border-gray-100">
+                            <p class="text-gray-600">Employees can access their personal payroll portal via web or mobile app where they can view and download pay stubs, update W-4 forms, manage direct deposit information, request time off, and view year-end tax documents. Managers can approve time-off requests and review timesheets through the same portal system.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="text-xl font-semibold text-gray-800">Can we integrate with our existing HR and accounting software?</h3>
+                            <i class="fas fa-plus text-blue-600"></i>
+                        </button>
+                        <div class="faq-content mt-4 hidden pt-4 border-t border-gray-100">
+                            <p class="text-gray-600">PayrollSync offers seamless integrations with hundreds of popular HRIS, time tracking, and accounting platforms through our API and pre-built connectors. Common integrations include QuickBooks, Xero, ADP, BambooHR, TSheets, and more. Our implementation team can help with custom integration needs.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="text-xl font-semibold text-gray-800">What kind of support is available?</h3>
+                            <i class="fas fa-plus text-blue-600"></i>
+                        </button>
+                        <div class="faq-content mt-4 hidden pt-4 border-t border-gray-100">
+                            <p class="text-gray-600">All plans include 24/7 customer support via chat, email, and phone. Our U.S.-based support team has an average response time of under 10 minutes for critical issues. Plus, you get access to our comprehensive knowledge base, video tutorials, and quarterly training webinars. Premium support options with dedicated account managers are available for enterprise clients.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 5 -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <button class="faq-toggle w-full flex justify-between items-center text-left">
+                            <h3 class="text-xl font-semibold text-gray-800">How is our data protected?</h3>
+                            <i class="fas fa-plus text-blue-600"></i>
+                        </button>
+                        <div class="faq-content mt-4 hidden pt-4 border-t border-gray-100">
+                            <p class="text-gray-600">PayrollSync uses bank-level 256-bit encryption for all data in transit and at rest. We maintain SOC 2 Type II compliance and regular third-party security audits. Features include multi-factor authentication, IP restrictions, role-based permissions, and automated activity logging. Your data resides in highly secure AWS data centers with 24/7 physical security.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12">
+                <div class="col-span-2">
+                    <div class="flex items-center mb-6">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1cce86bf-e802-49c3-8468-4ca3693fb65d.png" alt="PayrollSync logo featuring a white paycheck icon with dollar symbols" class="h-10 w-10"/>
+                        <span class="ml-2 text-xl font-bold">PayrollSync</span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Modern payroll solutions designed to save you time, reduce errors, and ensure compliance.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-base font-semibold uppercase tracking-wider mb-6 text-gray-400">Product</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Integrations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Updates</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Status</a></li>
                     </ul>
-                    <div class="register-image">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fffa9318-8f31-4030-82d2-e94595dee251.png" alt="Payroll analytics dashboard showing charts and metrics">
-                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Powerful Features for Your Business</h2>
-                <p>PayEase provides all the tools you need to manage your payroll efficiently and accurately.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3>Automated Calculations</h3>
-                    <p>Automatically calculate payroll, taxes, and deductions with precision, saving hours of manual work.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-file-invoice-dollar"></i>
-                    </div>
-                    <h3>Tax Compliance</h3>
-                    <p>Stay up-to-date with all tax regulations and automatically generate required reports and filings.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>Time Tracking</h3>
-                    <p>Integrated time tracking that syncs directly with your payroll for accurate payment calculations.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-                    <h3>Employee Self-Service</h3>
-                    <p>Empower employees with their own portal to view payslips, update information, and request time off.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Advanced Reporting</h3>
-                    <p>Generate comprehensive reports for payroll analysis, budgeting, and strategic decision-making.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h3>Bank-Level Security</h3>
-                    <p>Your data is protected with enterprise-grade security measures and regular backups.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="dashboard" id="dashboard">
-        <div class="container">
-            <div class="section-header">
-                <h2>Intuitive Dashboard</h2>
-                <p>Our clean, user-friendly interface makes payroll management simple and efficient.</p>
-            </div>
-            <div class="dashboard-container">
-                <div class="dashboard-image">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/eb70fc8c-484f-40d0-9741-b339a4c504dd.png" alt="Modern payroll dashboard interface showing employee statistics, payment summaries and financial charts with dark and light theme toggle">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>Trusted by Businesses Worldwide</h2>
-                <p>Join thousands of satisfied customers who have streamlined their payroll process.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"PayEase has reduced our payroll processing time by 70%. The automated tax calculations alone have saved us countless hours and eliminated costly errors."</p>
-                    <div class="testimonial-author">
-                        <div class="author-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cf7b530b-a7b9-473d-b040-d10682b3a175.png" alt="Portrait of Sarah Johnson, HR Director at TechSolutions Inc.">
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>HR Director, TechSolutions Inc.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"The employee self-service portal has dramatically reduced the number of payroll-related inquiries our HR team receives. Now employees can find everything they need themselves."</p>
-                    <div class="testimonial-author">
-                        <div class="author-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c064c232-fbca-48f0-bdde-a71994d25434.png" alt="Portrait of Michael Chen, Finance Manager at RetailCorp">
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael Chen</h4>
-                            <p>Finance Manager, RetailCorp</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <p class="testimonial-text">"Switching to PayEase was the best decision we made. The implementation was seamless, and the customer support team is incredibly responsive."</p>
-                    <div class="testimonial-author">
-                        <div class="author-image">
-                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/58009026-d6a3-4517-8e2a-34eda3326d68.png" alt="Portrait of Emma Davis, CEO of Startup Ventures">
-                        </div>
-                        <div class="author-info">
-                            <h4>Emma Davis</h4>
-                            <p>CEO, Startup Ventures</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta" id="pricing">
-        <div class="container">
-            <h2>Ready to Simplify Your Payroll?</h2>
-            <p>Join thousands of businesses who trust PayEase for accurate, compliant, and hassle-free payroll management.</p>
-            <a href="#" class="btn btn-white">Get Started Today</a>
-        </div>
-    </section>
-
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>PayEase</h3>
-                    <p>Modern payroll management system designed to make employee administration simple, accurate, and compliant.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Product</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Features</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Integrations</a></li>
-                        <li><a href="#">Updates</a></li>
-                        <li><a href="#">Roadmap</a></li>
+                
+                <div>
+                    <h4 class="text-base font-semibold uppercase tracking-wider mb-6 text-gray-400">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
-                    <h3>Company</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Documentation</a></li>
-                        <li><a href="#">Community</a></li>
-                        <li><a href="#">Webinars</a></li>
-                        <li><a href="#">Status</a></li>
+                
+                <div>
+                    <h4 class="text-base font-semibold uppercase tracking-wider mb-6 text-gray-400">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Webinars</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">API Docs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Partners</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2023 PayEase. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 PayrollSync. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Header shadow on scroll
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if(window.scrollY > 10) {
-                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
-            } else {
-                header.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-            }
-        });
+        // Simple form validation could be added here if needed
     </script>
 </body>
 </html>
 
-, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
+
 </body>
 </html>
